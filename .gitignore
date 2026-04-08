@@ -1,0 +1,43 @@
+# Fichiers temporaires Windows
+Thumbs.db
+*.tmp
+*.temp
+
+# Logs
+*.log
+logs/
+
+# Fichiers de configuration locaux (ne pas commiter)
+config.local.php
+.env
+
+# Dossiers de cache
+cache/
+tmp/
+
+# Archives ZIP (générées localement)
+*.zip
+
+# Fichiers de base de données locaux (si créés)
+*.db
+*.sqlite
+
+# Sessions PHP (si stockées en fichiers)
+session/
+
+# Dossiers IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node.js (si ajouté plus tard)
+node_modules/
+npm-debug.log*
+
+# Composer (si ajouté plus tard)
+vendor/
+
+# Archives de déploiement
+dist/
+build/

@@ -1,0 +1,25 @@
+# Configuration des attributs Git pour le projet
+
+# Fins de ligne
+* text=auto
+
+# Fichiers PHP
+*.php text eol=lf
+
+# Fichiers SQL
+*.sql text eol=lf
+
+# Fichiers de configuration
+*.ini text eol=lf
+*.cfg text eol=lf
+
+# Fichiers texte
+*.md text eol=lf
+*.txt text eol=lf
+
+# Fichiers binaires
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary

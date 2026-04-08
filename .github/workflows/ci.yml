@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: pdo, pdo_mysql
+
+    - name: Check PHP syntax
+      run: |
+        find . -name "*.php" -exec php -l {} \;
+
+    - name: Setup MySQL
+      run: |
+        sudo systemctl start mysql
+        mysql -e 'CREATE DATABASE ecommerce;' -u root -proot
+
+    - name: Import database
+      run: |
+        mysql -u root -proot ecommerce < db.sql
+
+    - name: Run basic tests
+      run: |
+        # Test de connexion à la base
+        php -r "
+        try {
+          \$pdo = new PDO('mysql:host=localhost;dbname=ecommerce', 'root', 'root');
+          echo 'Connexion DB réussie\n';
+        } catch (Exception \$e) {
+          echo 'Erreur DB: ' . \$e->getMessage() . '\n';
+          exit(1);
+        }
+        "
