@@ -22,6 +22,18 @@ CREATE TABLE products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Table des avis et notes des produits
+CREATE TABLE reviews (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    product_id INT,
+    rating TINYINT NOT NULL,
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
 -- Table du panier (sessions)
 CREATE TABLE cart (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -55,7 +67,7 @@ CREATE TABLE order_items (
 );
 
 -- Insérer quelques produits exemples
-INSERT INTO products (name, description, price, stock) VALUES
-('Ordinateur Portable', 'Un ordinateur portable performant', 999.99, 10),
-('Smartphone', 'Téléphone intelligent dernière génération', 599.99, 20),
-('Casque Audio', 'Casque sans fil avec réduction de bruit', 199.99, 15);
+INSERT INTO products (name, description, price, image, stock) VALUES
+('Ordinateur Portable', 'Un ordinateur portable performant', 999.99, 'https://via.placeholder.com/400x250?text=Ordinateur+Portable', 10),
+('Smartphone', 'Téléphone intelligent dernière génération', 599.99, 'https://via.placeholder.com/400x250?text=Smartphone', 20),
+('Casque Audio', 'Casque sans fil avec réduction de bruit', 199.99, 'https://via.placeholder.com/400x250?text=Casque+Audio', 15);

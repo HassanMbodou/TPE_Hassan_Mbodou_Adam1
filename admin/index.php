@@ -33,7 +33,10 @@ $orders = $db->query("SELECT o.*, u.username FROM orders o JOIN users u ON o.use
         </nav>
     </header>
     <main>
-        <h2>Produits</h2>
+        <div class="admin-actions">
+            <h2>Produits</h2>
+            <a class="button" href="product_form.php?action=add">Ajouter un produit</a>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -41,6 +44,7 @@ $orders = $db->query("SELECT o.*, u.username FROM orders o JOIN users u ON o.use
                     <th>Nom</th>
                     <th>Prix</th>
                     <th>Stock</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +54,11 @@ $orders = $db->query("SELECT o.*, u.username FROM orders o JOIN users u ON o.use
                         <td><?php echo htmlspecialchars($product['name']); ?></td>
                         <td><?php echo $product['price']; ?> fcfa</td>
                         <td><?php echo $product['stock']; ?></td>
+                        <td>
+                            <a href="product_form.php?action=edit&id=<?php echo $product['id']; ?>">Modifier</a>
+                            |
+                            <a href="product_delete.php?id=<?php echo $product['id']; ?>">Supprimer</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

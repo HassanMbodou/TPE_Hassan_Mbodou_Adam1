@@ -26,29 +26,40 @@ foreach ($cart_items as $item) {
     $total += $item['price'] * $item['quantity'];
 }
 
+$errorMessage = '';
+$paymentMessage = '';
+$paymentMethod = '';
+$availablePayments = [
+    'stripe' => 'Stripe',
+    'paypal' => 'PayPal'
+];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Créer la commande
-    $stmt = $db->prepare("INSERT INTO orders (user_id, total) VALUES (?, ?)");
-    $stmt->execute([$user_id, $total]);
-    $order_id = $db->lastInsertId();
+    $paymentMethod = $_POST['payment_method'] ?? '';
+    if (!array_key_exists($paymentMethod, $availablePayments)) {
+        $errorMessage = 'Veuillez choisir une méthode de paiement.';
+    } else {
+        $stmt = $db->prepare("INSERT INTO orders (user_id, total, status) VALUES (?, ?, ?)");
+        $stmt->execute([$user_id, $total, 'completed']);
+        $order_id = $db->lastInsertId();
 
-    // Ajouter les items
-    foreach ($cart_items as $item) {
-        $stmt = $db->prepare("INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$order_id, $item['product_id'], $item['quantity'], $item['price']]);
+        // Ajouter les items
+        foreach ($cart_items as $item) {
+            $stmt = $db->prepare("INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$order_id, $item['product_id'], $item['quantity'], $item['price']]);
 
-        // Mettre à jour le stock
-        $new_stock = $item['stock'] - $item['quantity'];
-        $stmt = $db->prepare("UPDATE products SET stock = ? WHERE id = ?");
-        $stmt->execute([$new_stock, $item['product_id']]);
+            // Mettre à jour le stock
+            $new_stock = $item['stock'] - $item['quantity'];
+            $stmt = $db->prepare("UPDATE products SET stock = ? WHERE id = ?");
+            $stmt->execute([$new_stock, $item['product_id']]);
+        }
+
+        // Vider le panier
+        $stmt = $db->prepare("DELETE FROM cart WHERE user_id = ?");
+        $stmt->execute([$user_id]);
+
+        $paymentMessage = 'Paiement ' . $availablePayments[$paymentMethod] . ' simulé : commande créée avec succès.';
     }
-
-    // Vider le panier
-    $stmt = $db->prepare("DELETE FROM cart WHERE user_id = ?");
-    $stmt->execute([$user_id]);
-
-    echo "Commande passée avec succès!";
-    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -70,9 +81,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <main>
         <h2>Finaliser la commande</h2>
         <p>Total: <?php echo $total; ?> €</p>
-        <form method="post">
-            <button type="submit">Confirmer la commande</button>
+
+        <?php if (!empty($errorMessage)): ?>
+            <p class="error"><?php echo htmlspecialchars($errorMessage); ?></p>
+        <?php endif; ?>
+        <?php if (!empty($paymentMessage)): ?>
+            <p class="success"><?php echo htmlspecialchars($paymentMessage); ?></p>
+        <?php endif; ?>
+
+        <form method="post" class="checkout-form">
+            <label>Choisissez une méthode de paiement :</label>
+            <div class="payment-options">
+                <label><input type="radio" name="payment_method" value="stripe" <?php echo $paymentMethod === 'stripe' ? 'checked' : ''; ?>> Stripe</label>
+                <label><input type="radio" name="payment_method" value="paypal" <?php echo $paymentMethod === 'paypal' ? 'checked' : ''; ?>> PayPal</label>
+            </div>
+            <button type="submit">Payer maintenant</button>
         </form>
+
+        <p class="payment-note">Mode démonstration : les paiements Stripe et PayPal sont simulés dans cette version du projet.</p>
     </main>
     <footer>
         <p>&copy; 2026 Hassan E-commerce</p>

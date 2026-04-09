@@ -73,15 +73,71 @@ input, button {
     margin-top: 0.5rem;
 }
 
-button {
+button,
+.button {
+    display: inline-block;
     background-color: #333;
     color: white;
     border: none;
     cursor: pointer;
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
 }
 
-button:hover {
+button:hover,
+.button:hover {
     background-color: #555;
+}
+
+.product-image,
+.product-detail-image {
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.product-meta,
+.review-header,
+.payment-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.product-rating,
+.review-count,
+.payment-note,
+.success,
+.error {
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.product-reviews,
+.review-item,
+.checkout-form,
+.review-form {
+    margin-top: 2rem;
+}
+
+.review-item {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #fafafa;
+}
+
+.admin-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 footer {
@@ -89,7 +145,44 @@ footer {
     padding: 1rem;
     background-color: #333;
     color: white;
-    position: fixed;
-    bottom: 0;
+    position: relative;
     width: 100%;
+}
+
+@media (max-width: 900px) {
+    .products {
+        flex-direction: column;
+    }
+
+    .product {
+        width: 100%;
+    }
+
+    header,
+    main,
+    footer {
+        padding: 1rem;
+    }
+
+    .product-meta,
+    .payment-options,
+    .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .product input[type="number"],
+    .checkout-form select,
+    .checkout-form textarea,
+    .review-form textarea {
+        width: 100%;
+    }
 }
