@@ -82,4 +82,87 @@ TPE_Hassan_Mbodou_Adam/
 ├── CHANGELOG.md          # Historique des versions
 └── LICENSE                # Licence du projet
 ```
+## Installation et Configuration
 
+### Méthode 1 : Avec XAMPP (Recommandé pour Windows)
+
+#### Prérequis
+- XAMPP installé (Apache, MySQL, PHP)
+- Navigateur web moderne
+
+#### Étapes d'Installation
+
+1. **Démarrer XAMPP**
+   - Lancez le panneau de contrôle XAMPP
+   - Démarrez les modules Apache et MySQL
+
+2. **Importer la Base de Données**
+   - Ouvrez phpMyAdmin : `http://localhost/phpmyadmin/`
+   - Créez une nouvelle base de données nommée `ecommerce`
+   - Importez le fichier `db.sql`
+
+3. **Placer le Projet**
+   - Le dossier du projet doit être dans `C:\xampp\htdocs\TPE_Hassan_Mbodou_Adam\`
+
+4. **Accéder au Site**
+   - URL : `http://localhost/TPE_Hassan_Mbodou_Adam/`
+
+### Méthode 2 : Avec Docker (Alternative Multiplateforme)
+
+#### Prérequis
+- Docker et Docker Compose installés
+
+#### Installation Rapide
+```bash
+# Depuis le dossier du projet
+docker-compose up -d
+```
+
+#### Accès
+- Site web : `http://localhost:8080`
+- Base de données : `localhost:3306` avec user: `user`, password: `password`
+
+## Utilisation
+
+1. **Inscription** : Créez un compte utilisateur
+2. **Connexion** : Connectez-vous avec vos identifiants
+3. **Navigation** : Parcourez les produits
+4. **Achat** : Ajoutez des articles au panier et validez la commande
+5. **Administration** : Connectez-vous avec l'utilisateur ID 1 pour accéder au panel admin
+
+## Sécurité
+
+**Note Importante** : Ce site est une démonstration éducative et n'est pas sécurisé pour un environnement de production.
+
+- Mots de passe hashés avec `password_hash()`
+- Protection contre les injections SQL avec PDO
+- Sessions PHP pour la gestion des utilisateurs
+- Validation basique des entrées
+
+Pour une version production, ajouter :
+- Validation côté client et serveur
+- Protection CSRF
+- Chiffrement des données sensibles
+- Logs d'audit
+
+## Dépannage
+
+### Erreurs Courantes
+- **Erreur de connexion DB** : Vérifiez que MySQL est démarré et que les identifiants dans `config.php` sont corrects
+- **Pages blanches** : Vérifiez les logs Apache dans XAMPP
+- **Erreur 404** : Assurez-vous que le dossier est bien dans `htdocs`
+
+### Logs
+- Apache : `C:\xampp\apache\logs\error.log`
+- PHP : `C:\xampp\php\logs\php_error_log`
+
+## Auteur
+
+- **Nom** : Hassan Mbodou Adam
+- **Classe** : [Votre classe]
+- **Établissement** : [Nom de l'établissement]
+- **Année** : 2025-2026
+
+## Remerciements
+
+Merci à [Professeur] pour l'encadrement de ce TPE.
