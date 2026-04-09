@@ -158,13 +158,5 @@ Pour une version production, ajouter :
 - Responsive design pour mobile
 - API REST pour les futures extensions
 
-## Auteur
-
-- **Nom** : Hassan Mbodou Adam
-- **Classe** : [Votre classe]
-- **Établissement** : [Nom de l'établissement]
-- **Année** : 2023-2024
-
-## Remerciements
 
 
