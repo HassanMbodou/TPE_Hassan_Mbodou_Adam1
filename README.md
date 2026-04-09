@@ -1,5 +1,14 @@
 # Site E-commerce Dynamique - TPE Hassan Mbodou Adam
 
+---
+
+**Auteur** : Hassan Mbodou Adam  
+**Matricule** : 23A624FS  
+**Projet** : TPE (Travail Personnel Encadré)  
+**Année** : 2025-2026
+
+---
+
 ## Description du Projet
 
 Ce projet est un site e-commerce complet réalisé en PHP avec MySQL dans le cadre d'un Travail Personnel Encadré (TPE). Il permet aux utilisateurs de naviguer dans un catalogue de produits, de s'inscrire, de se connecter, d'ajouter des articles à leur panier et de passer des commandes. Un panel d'administration est également disponible pour gérer les produits et les commandes.

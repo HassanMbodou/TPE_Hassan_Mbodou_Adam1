@@ -1,4 +1,14 @@
 <?php
+/**
+ * PROJET TPE - Site E-commerce Dynamique
+ * 
+ * Auteur : Hassan Mbodou Adam
+ * Matricule : 23A624FS
+ * Année : 2023-2024
+ * 
+ * Page d'accueil - Affichage du catalogue de produits
+ */
+
 session_start();
 require 'config.php';
 $db = getDBConnection();
