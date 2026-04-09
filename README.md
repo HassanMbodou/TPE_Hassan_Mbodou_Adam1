@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Site E-commerce Dynamique - TPE Hassan Mbodou Adam
 
 ---
@@ -166,4 +167,4 @@ Pour une version production, ajouter :
 
 ## Remerciements
 
-Merci à [Professeur] pour l'encadrement de ce TPE.
+
